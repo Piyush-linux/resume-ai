@@ -55,3 +55,22 @@ hover:scale-105 transition-all hover:shadow-xl
 # Layout
 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
 ```
+
+# Learning
+- use import statement wisely
+- rearrange if require
+```
+import useState
+import uuid
+```
+
+- using axios for backend req through Client(Frontend)
+- put outside /src
+- import whole Module not just single enitity
+    - NO: `import { sample } from ../../service/api.js`
+    - YES: `import API from ../../service/api.js; API.CreateReq(...)`
+- useState if you want to store Array
+    - NO: `resume = useState('');  resume.map([...])`
+    - YES: `resume = useSTate([]); `
+- use `useEffect` if you want to fetch something on landing to that page `eg: dashboard, gallery`
+- animate Spin: `<LoaderCircle className='animate-spin' />`

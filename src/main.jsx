@@ -14,6 +14,7 @@ import Dashboard from './routes/app/dashboard';
 import SignIn from './routes/auth/sign-in';
 import LayoutWeb from './routes/LayoutWeb';
 import Create from './routes/app/dashboard/create';
+import EditResume from './routes/app/dashboard/resume/edit/[id]';
 
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -49,11 +50,11 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard />
       },{
-        path: "/dashboard/create",
+        path: "/create",
         element: <Create />
       },{
-        path: "/dashboard/resume/:id",
-        element: <Dashboard />
+        path: "/resume/edit/:id",
+        element: <EditResume />
       },
     ]
   },

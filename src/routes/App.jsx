@@ -1,10 +1,10 @@
+import { useUser } from '@clerk/clerk-react';
 import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from '@clerk/clerk-react';
+
 
 export default function App() {
   const navigate = useNavigate();
-
   let { isLoaded, isSignedIn } = useUser();
 
   if (isLoaded) {

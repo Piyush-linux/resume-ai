@@ -1,29 +1,37 @@
-import ResumeCard from "@/components/app/ResumeCard";
-import { useNavigate } from "react-router-dom";
 import {  useUser } from "@clerk/clerk-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import API from "./../../../../service/GlobalApi"
+import ResumeCard from "@/components/app/ResumeCard";
 import AddResume from "@/components/app/AddResume";
 
 
 
 export default function Dashboard() {
     const navigate = useNavigate();
-    let { isLoaded, isSignedIn  } = useUser();
-
-
-    
-
+    let { isLoaded, isSignedIn, user  } = useUser();
+    let [resumes,setResumes] = useState([]);
     if (isLoaded) {
         if (!isSignedIn) {
             console.log(isSignedIn)
             navigate('/auth/sign-in')
         }    
     } ;
+
+    let getResume = async () =>{
+        let mail = await user?.primaryEmailAddress?.emailAddress
+        // console.log(mail)
+        if(mail){
+            let { data } = await API.FetchResume(mail);
+            setResumes(data.data)
+        }
+        
+    }
     
 
     useEffect(()=>{
-        
-    },[isLoaded])
+        getResume()
+    },[user])
 
 
     return (
@@ -33,20 +41,16 @@ export default function Dashboard() {
                     <div className="col-span-1 h-80 p-6">
                         <AddResume/>
                     </div>
-                    <div className="col-span-1">
-                        <ResumeCard  color="bg-lime-300" />
-                    </div>
-                    <div className="col-span-1">
-                        <ResumeCard  color="bg-rose-300" />
-                    </div>
-                    <div className="col-span-1">
-                        <ResumeCard  color="bg-amber-300" />
-                    </div>
-                    <div className="col-span-1">
-                        <ResumeCard  color="bg-emerald-300" />
-                    </div>
+                    {
+                        resumes.length != 0 && resumes.map((x,i)=>{
+                        return(
+                        <div className="col-span-1" key={i}>
+                            <ResumeCard title={x.title} resumeid={x.resumeid} color="bg-lime-300" />
+                        </div>
+                        )
+                        })
+                    }
                 </div>
-
             </div>
         </>
     )

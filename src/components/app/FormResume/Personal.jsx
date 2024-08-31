@@ -5,11 +5,11 @@ export default function Personal() {
         <div className="p-5 space-y-4">
             <div className="">
                 <span className="text-sm tracking-widest">Personal</span>
-                <Input/>
+                <Input placeholder="" />
             </div>
             <div className="">
                 <span className="text-sm tracking-widest">Personal</span>
-                <Input/>
+                <Input placeholder="" />
             </div>
         </div>
     )
