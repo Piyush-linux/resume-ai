@@ -18,7 +18,7 @@ import API from './../../../service/GlobalApi';
 
 
 
-export default function AddResume() {
+export default function AddResume({refreshData}) {
 
     let { user } = useUser();
     let [openDialog, setDialog] = useState(false);
@@ -42,9 +42,11 @@ export default function AddResume() {
         try {
             console.log(resume)
             let { data } = await API.CreateResume(resume)
-            console.log(data.data)
+            // console.log(data.data)
+            refreshData();
             setLoading(false);
             setDialog(false);
+            
 
         } catch (error) {
             console.error(error)
@@ -53,7 +55,7 @@ export default function AddResume() {
     }
 
     return (
-        <div className="w-full h-full     cursor-pointer border-2 rounded-lg border-dashed p-1">
+        <div className="w-full h-full cursor-pointer border-2 rounded-lg border-dashed p-1">
             <div onClick={() => setDialog(true)} className="bg-slate-300 w-full h-full flex justify-center items-center rounded-lg transition-all hover:scale-105 hover:shadow-xl">
                 <button className="text-white"><SquarePlus size={42} /></button>
             </div>

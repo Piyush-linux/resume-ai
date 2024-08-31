@@ -12,9 +12,12 @@ const instance = axios.create({
   });
 
 const CreateResume = (data) => instance.post('/resumes',data);
-const FetchResume = (mail) => instance.get('/resumes?filters[user_email][$eq]='+mail);
+//-- TODO: Filter fields=title,resumeid
+const FetchResume = (mail) => instance.get(`/resumes?filters[user_email][$eq]=${mail}`);
+const FetchSingleResme = (id) => instance.get(`/resumes?filters[resumeid][$eq]=${id}`);
 
 export default{ 
   CreateResume ,
-  FetchResume
+  FetchResume ,
+  FetchSingleResme 
 };

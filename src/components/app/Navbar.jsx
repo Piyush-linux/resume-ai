@@ -1,4 +1,5 @@
 import { UserButton } from "@clerk/clerk-react";
+import { Button } from "../ui/button";
 
 export default function Navbar() {
     return (
@@ -39,12 +40,7 @@ export default function Navbar() {
                                     </svg>
                                 </button>
 
-                                <button
-                                    className="inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
-                                    type="button"
-                                >
-                                    Create Post
-                                </button>
+                                <Button variant="primary">Create Post</Button>
                                 <UserButton className="h-16 w-16" />
                             </div>
                         </div>
