@@ -14,10 +14,13 @@ const instance = axios.create({
 const CreateResume = (data) => instance.post('/resumes',data);
 //-- TODO: Filter fields=title,resumeid
 const FetchResume = (mail) => instance.get(`/resumes?filters[user_email][$eq]=${mail}`);
-const FetchSingleResme = (id) => instance.get(`/resumes?filters[resumeid][$eq]=${id}`);
+const FetchSingleResume = (id) => instance.get(`/resumes?filters[resumeid][$eq]=${id}`);
+const RemoveSingleResume = (id) => instance.delete(`/resumes?fields[0]=${id}`);
+
 
 export default{ 
   CreateResume ,
   FetchResume ,
-  FetchSingleResme 
+  FetchSingleResume ,
+  RemoveSingleResume
 };

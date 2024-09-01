@@ -1,7 +1,7 @@
 # React + Vite
 
 ## Task
-- [ ] Vercel Postgres
+- [ ] Toast 
 
 
 ## Backend 
@@ -74,3 +74,9 @@ import uuid
     - YES: `resume = useSTate([]); `
 - use `useEffect` if you want to fetch something on landing to that page `eg: dashboard, gallery`
 - animate Spin: `<LoaderCircle className='animate-spin' />`
+- Strapi Ref: https://docs.strapi.io/dev-docs/api/rest
+- useContaext
+    - state name same throughtout 
+    - Provider pass throughtout by wrapping
+    - `[data, setData] = useState(); <Provider value={{data, setData}}>`
+    - `let {data, setData} = useContext(context)`
