@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { ResumeContext } from "@/context/ResumeInfo";
 import API from "./../../../../../../../service/GlobalApi"
 import Loader from "@/components/Loader";
-import { Button } from "@/components/ui/button";
 import FormSection from "./components/FormSection";
 import PreviewSection from "./components/PreviewSection";
 import data from "./../../../../../../../data/dummy";
@@ -49,16 +48,19 @@ export default function EditResume() {
     }, [id])
 
     return (
-        <ResumeContext.Provider value={{resumeInfo,setResumeInfo}}>
+        <ResumeContext.Provider value={{ resumeInfo, setResumeInfo }}>
             <div className="">
                 {/* Edit : {id} / <Button onClick={()=> removeResume()}>Remove</Button> */}
                 {/* Title: {ResumeInfo.title} */}
-                {resumeInfo?.name}
                 {loading ? <Loader /> :
 
-                    (<div className="w-full grid grid-cols-2">
-                        <FormSection className="col-span-1" />
-                        <PreviewSection className="col-span-1"  />
+                    (<div className="w-full grid grid-cols-3">
+                        <div className="col-span-1">
+                            <FormSection />
+                        </div>
+                        <div className="col-span-2">
+                            <PreviewSection />
+                        </div>
                     </div>)
                 }
             </div>

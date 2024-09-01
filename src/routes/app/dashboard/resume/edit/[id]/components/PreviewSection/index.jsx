@@ -4,26 +4,25 @@ import ExperiencePreview from "./experiencePreview";
 import PersonalPreview from "./personalPreview";
 import SkillPreview from "./skillPreview";
 import SummaryPreview from "./summaryPreview";
-
+import EducationPreview from "./educationPreview";
 
 export default function PreviewSection() {
-
 
     let { resumeInfo, setResumeInfo } = useContext(ResumeContext);
 
     return (
-        <div className="border-2 border-gray-500 rounded-lg p-3 space-y-5">
+        <div className="resume w-full border-2 border-gray-500 rounded-lg p-10 space-y-5">
             {/* Personal */}
             <PersonalPreview resumeInfo={resumeInfo} />
-            <div className="w-full border-2 border-gray-800 my-2 rounded-xl"></div>
+            <div className="w-full border-2 border-gray-800 mb-2 rounded-xl"></div>
             {/* summary */}
-            <SummaryPreview />
+            <SummaryPreview resumeInfo={resumeInfo} />
             {/* Experience */}
             <ExperiencePreview />
+            {/* Education */}
+            <EducationPreview/>
             {/* Skill */}
-            <SkillPreview />
-
-
+            <SkillPreview resumeInfo={resumeInfo} />
         </div>
     )
 }

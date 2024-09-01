@@ -1,8 +1,10 @@
-export default function SummaryPreview() {
+export default function SummaryPreview({resumeInfo}) {
     return (
         <div className="w-full">
             <div className="text-lg font-bold tracking-widest uppercase">summary</div>
-            <p className="text-xs text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur nostrum eligendi ratione sed inventore possimus eveniet nihil voluptas porro corrupti rerum consectetur nam impedit facilis id iste, vitae quas deleniti.</p>
+            <p className="text-xs text-justify">
+                {resumeInfo.summary}
+            </p>
         </div>
     )
-}
+} 
