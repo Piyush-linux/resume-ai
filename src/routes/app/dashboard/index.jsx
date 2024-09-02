@@ -45,7 +45,7 @@ export default function Dashboard() {
                         resumes.length != 0 && resumes.map((x,i)=>{
                         return(
                         <div className="col-span-1" key={i}>
-                            <ResumeCard title={x.title} resumeid={x.resumeid} color="bg-lime-300" />
+                            <ResumeCard title={x.title} resumeid={x.documentId} color="bg-lime-300" />
                         </div>
                         )
                         })

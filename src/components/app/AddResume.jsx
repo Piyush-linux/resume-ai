@@ -34,8 +34,8 @@ export default function AddResume({refreshData}) {
             data: {
                 title: ResumeTitle,
                 resumeid: id,
-                user_email: user?.primaryEmailAddress?.emailAddress,
-                user_name: user?.fullName
+                mail: user?.primaryEmailAddress?.emailAddress,
+                name: user?.fullName
             }
         }
 
