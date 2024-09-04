@@ -17,13 +17,15 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
   };
   
   
-   export const AIChatSession = model.startChat({
+   const AIChatSession = model.startChat({
       generationConfig,
    // safetySettings: Adjust safety settings
    // See https://ai.google.dev/gemini-api/docs/safety-settings
       history: [
       ],
     });
+
+    export default AIChatSession;
   
   
   
