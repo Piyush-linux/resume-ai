@@ -26,9 +26,7 @@ export default function SummaryForm() {
             let newPrompt = prompt.replace("{position}",resumeInfo?.position)
             const {response} = await AI.sendMessage(newPrompt);
             
-
             // json_match = response.text().search(r"```json\s*(.*?)\s*```", json_str, re.DOTALL) ;
-
 
             let data = JSON.parse(response.text())
             setAiList(data);
@@ -61,12 +59,14 @@ export default function SummaryForm() {
 
 
     let handleSave = async () => {
+        setLoading(true)
         try {
             let data = await API.UpdateSingleResume(id, {data:{summary: summary}});
-            console.log(data)
+            // console.log(data)
         } catch (error) {
             console.log(error)
         }
+        setLoading(false)
     }
 
     useEffect(() => {
