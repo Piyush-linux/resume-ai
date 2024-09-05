@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import PersonalForm from "./personalForm";
 import { useState } from "react";
 import SummaryForm from "./summaryForm";
+import ExperienceForm from "./experienceForm";
 
 export default function FormSection() {
 
@@ -17,6 +18,7 @@ export default function FormSection() {
             
             {formIndex == 1 && <PersonalForm/> }
             {formIndex == 2 && <SummaryForm/> }
+            {formIndex == 3 && <ExperienceForm/> }
             
              
         </div>
