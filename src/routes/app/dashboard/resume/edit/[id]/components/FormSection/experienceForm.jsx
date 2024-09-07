@@ -1,5 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ResumeContext } from "@/context/ResumeInfo";
 import API from "./../../../../../../../../../service/GlobalApi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,47 +12,30 @@ export default function ExperienceForm() {
     let { resumeInfo, setResumeInfo } = useContext(ResumeContext)
     let { id } = useParams();
     let [loading, setLoading] = useState(false);
-    let [expList, setExpList] = useState([
-        {
-            position: "",
-            company: "",
-            location: "",
-            startDate: "",
-            endDate: "",
-            summary:""
-        }
-    ]);
+    let [expList, setExpList] = useState([]);
 
-    let handleInput = (e) => {
-        let { name, value } = e.target;
-        console.log(name, value)
-        setResumeInfo(resumeInfo => ({
-            ...resumeInfo,
-            [name]: value
-        })
-        )
-        // setFormData(formData =>({
-        //     ...formData,
-        //     [name]:value 
-        // }))
+    let handleInput = (e, index) => {
+        const newEntries = expList.slice();
+        const { name, value } = e.target;
+        newEntries[index][name] = value;
+        // console.log(newEntries)
+        setExpList(newEntries);
     }
-
 
     let handleRemoveExp = () => {
-        console.log("remove---");
         let entries = expList;
-        entries.slice(0,-1);
+        entries.slice(0, -1);
         setExpList(entries);
     }
-    
+
     let handleAddExp = () => {
-        setExpList([...expList,{
+        setExpList([...expList, {
             position: "",
             company: "",
             location: "",
             startDate: "",
             endDate: "",
-            summary:""
+            summary: ""
         }])
     }
 
@@ -59,7 +43,8 @@ export default function ExperienceForm() {
         console.log("Hello !")
         setLoading(true)
         try {
-            let data = await API.UpdateSingleResume(id, {data:expList});
+            console.log({experience: expList})
+            let data = await API.UpdateSingleResume(id, { data: {experience: expList} });
             console.log(data)
         } catch (error) {
             console.log(error)
@@ -67,22 +52,38 @@ export default function ExperienceForm() {
         setLoading(false)
     }
 
+    // useEffect(() => {
+    //     setExpList(resumeInfo?.experience)
+    // })
+
+
+    useEffect(()=>{
+        resumeInfo?.experience.length > 0 && setExpList(resumeInfo?.experience)
+    },[])
+    useEffect(() => {
+        setResumeInfo({
+            ...resumeInfo,
+            experience: expList
+        });
+
+    }, [expList]);
+
     return (
         <div className="w-full">
             <div className="text-lg mb-3">
                 Experinence
             </div>
             <div className="w-full space-y-6 overflow-y-scroll h-[400px]">
-                {expList.length > 0 && expList.map((itm,index) => {
+                {expList.length > 0 && expList.map((itm, index) => {
                     return (
-                        <form className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg">
-                            <div className="">No. {index+1} </div>
-                            <Input name="position" placeholder="Position" />
-                            <Input name="company" placeholder="Company" />
-                            <Input name="location" placeholder="location" />
-                            <Input name-="startDate" placeholder="startDate" />
-                            <Input name="endDate" placeholder="endDate" />
-                            <Textarea name="summary" placeholder="compnay summary" />
+                        <form key={index} className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg">
+                            <div className="">No. {index + 1} </div>
+                            <Input name="position" placeholder="Position" defaultValue={itm.position} onChange={(e) => handleInput(e, index)} />
+                            <Input name="company" placeholder="Company" defaultValue={itm.company} onChange={(e) => handleInput(e, index)} />
+                            <Input name="location" placeholder="location" defaultValue={itm.location} onChange={(e) => handleInput(e, index)} />
+                            <Input type="date" name-="startDate" placeholder="startDate" defaultValue={itm.startDate} onChange={(e) => handleInput(e, index)} />
+                            <Input type="date" name="endDate" placeholder="endDate" defaultValue={itm.endDate} onChange={(e) => handleInput(e, index)} />
+                            <Textarea name="summary" placeholder="compnay summary" defaultValue={itm.summary} onChange={(e) => handleInput(e, index)} />
                         </form>
                     )
                 })}

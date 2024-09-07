@@ -56,6 +56,13 @@ hover:scale-105 transition-all hover:shadow-xl
 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
 ```
 
+## API
+
+```
+http://localhost:1337/api/resumes?populate=*
+
+```
+
 # Learning
 - use import statement wisely
 - rearrange if require
