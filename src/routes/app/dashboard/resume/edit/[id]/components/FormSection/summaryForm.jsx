@@ -87,9 +87,10 @@ export default function SummaryForm() {
             <div className="w-full space-y-3">
                 <Textarea name="summary" defaultValue={summary} placeholder="address..." onChange={handleTextarea} />
             </div>
-            <div className="w-fit mx-auto mt-6">
-                <Button type="submit" variant="link" onClick={()=> handleSave() }> {loading? <Loader2 className="animate-spin" /> : "save" }  </Button>
+            <div className="w-full mx-auto mt-6">
+                <Button type="submit" variant="link" onClick={()=> handleSave() } className="w-full"> {loading? <Loader2 className="animate-spin" /> : "Save" }  </Button>
             </div>
+            {/* Summary... */}
             <div className="w-full mt-10 overflow-y-scroll h-80">
                 { aiList.length > 0 && aiList.map((x,i)=>{
                     return (<div onClick={()=> handleList(x.summary) } className="p-6 shadow-xl cursor-pointer rounded-lg border-2 border-rose-400 space-y-3 mb-5" key={i}>  

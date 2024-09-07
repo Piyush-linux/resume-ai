@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ResumeContext } from "@/context/ResumeInfo";
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ResumeContext } from "@/context/ResumeInfo";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import API from "./../../../../../../../../../service/GlobalApi";
 
 
@@ -24,7 +24,6 @@ export default function PersonalForm() {
             ...formData,
             [name]:value 
         }))
-        // console.log(resumeInfo)
     }
 
     // Update DB
@@ -38,7 +37,6 @@ export default function PersonalForm() {
         } catch (error) {
             console.log("--- Error ---", error)
         }
-
     }
 
     return (
@@ -52,12 +50,10 @@ export default function PersonalForm() {
                 <Input type="text" name="phone" defaultValue={resumeInfo.phone} placeholder="Phone" onChange={handleInput} />
                 <Input type="text" name="mail" defaultValue={resumeInfo.mail} placeholder="Email" onChange={handleInput} />
                 <Input type="text" name="location" defaultValue={resumeInfo.location} placeholder="Location" onChange={handleInput} />
-                <div className="w-fit mx-auto mt-6">
-                    <Button type="submit" variant="link">save</Button>
+                <div className="w-full mx-auto mt-6">
+                    <Button type="submit" variant="link" className="w-full">Save</Button>
                 </div>
             </form>
-
-
         </div>
     )
 }
