@@ -20,9 +20,9 @@ export default function PersonalForm() {
             [name]: value
         })
         )
-        setFormData(formData =>({
+        setFormData(formData => ({
             ...formData,
-            [name]:value 
+            [name]: value
         }))
     }
 
@@ -31,7 +31,7 @@ export default function PersonalForm() {
         e.preventDefault();
         console.log(formData)
         try {
-            let data = await API.UpdateSingleResume(id, {data:formData});
+            let data = await API.UpdateSingleResume(id, { data: formData });
 
             console.log(data);
         } catch (error) {
@@ -41,9 +41,11 @@ export default function PersonalForm() {
 
     return (
         <div className="w-full">
-            <div className="text-lg mb-3">
-                Personal
+            <div className="content mb-3">
+                <div className="text-xl">Personal</div>
+                <div className="text-sm">Add your personal details.</div>
             </div>
+
             <form className="w-full space-y-3" onSubmit={formSubmit}>
                 <Input type="text" name="name" defaultValue={resumeInfo.name} placeholder="Name" onChange={handleInput} />
                 <Input type="text" name="position" defaultValue={resumeInfo.position} placeholder="Job Position" onChange={handleInput} />

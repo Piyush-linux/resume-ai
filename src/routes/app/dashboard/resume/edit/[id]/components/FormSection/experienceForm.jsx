@@ -43,8 +43,8 @@ export default function ExperienceForm() {
         console.log("Hello !")
         setLoading(true)
         try {
-            console.log({experience: expList})
-            let data = await API.UpdateSingleResume(id, { data: {experience: expList} });
+            console.log({ experience: expList })
+            let data = await API.UpdateSingleResume(id, { data: { experience: expList } });
             console.log(data)
         } catch (error) {
             console.log(error)
@@ -57,9 +57,9 @@ export default function ExperienceForm() {
     // })
 
 
-    useEffect(()=>{
+    useEffect(() => {
         resumeInfo?.experience.length > 0 && setExpList(resumeInfo?.experience)
-    },[])
+    }, [])
     useEffect(() => {
         setResumeInfo({
             ...resumeInfo,
@@ -70,10 +70,11 @@ export default function ExperienceForm() {
 
     return (
         <div className="w-full">
-            <div className="text-lg mb-3">
-                Experinence
+            <div className="content mb-3">
+                <div className="text-xl"> Experinence</div>
+                <div className="text-sm">Add your experinecial details.</div>
             </div>
-            <div className="w-full space-y-6 overflow-y-scroll h-[400px]">
+            <div className="w-full space-y-6 overflow-y-scroll h-[440px]">
                 {expList.length > 0 && expList.map((itm, index) => {
                     return (
                         <form key={index} className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg">

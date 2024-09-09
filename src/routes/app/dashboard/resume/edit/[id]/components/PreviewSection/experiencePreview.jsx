@@ -13,8 +13,8 @@ let {resumeInfo, setResumeInfo} = useContext(ResumeContext);
                 { resumeInfo?.name  && resumeInfo?.experience.map((x, i) => {
                     return (
                         <div className="" key={i}>
-                            <div className="text-md"> {x?.position} </div>
-                            <div className="text-md font-extrabold text-gray-600 w-full flex justify-between"> <span>{x?.company} | {x?.location}</span> <span className=" text-xs"> {x.startDate} to {x.endDate}  </span>  </div>
+                            <div className="text-md font-bold text-gray-500"> {x?.position} </div>
+                            <div className="text-md w-full flex justify-between"> <span>{x?.company} | {x?.location}</span> <span className=" text-xs"> {x.startDate} to {x.endDate}  </span>  </div>
                             <div className="text-sm">{x?.summary}</div>
                         </div>
                     )

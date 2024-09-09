@@ -1,17 +1,26 @@
+import { useContext, useEffect, useState } from "react";
+import { ResumeContext } from "@/context/ResumeInfo";
+import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2, SquarePlus, SquareX } from "lucide-react";
-import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function EducationForm() {
 
+    let { resumeInfo, setResumeInfo } = useContext(ResumeContext)
+    let { id } = useParams();
     let [loading, setLoading] = useState(false);
-    let [eduList, setEduList] = useState([
-        {
-            name: "",
-            date: ""
-        }
-    ]);
+    let [eduList, setEduList] = useState([]);
+
+
+    let handleInput = (e,index) => {
+        const newEntries = eduList.slice();
+        const { name, value } = e.target;
+        newEntries[index][name] = value;
+        setEduList(newEntries);
+        console.log(eduList)
+    }
 
     let handleRemoveEdu = () => {
         let entries = eduList.slice(0, -1);
@@ -19,10 +28,16 @@ export default function EducationForm() {
     }
 
     let handleAddEdu = () => {
-        setEduList([...eduList, {
-            name: "",
-            date: ""
-        }])
+        setEduList([...eduList,
+            {
+                university:"",
+                degree:"",
+                major:"",
+                startDate:"",
+                endDate:"",
+                summary:""
+            }
+        ])
     }
 
     let handleSave = () => {
@@ -30,19 +45,35 @@ export default function EducationForm() {
     }
 
 
+    useEffect(()=>{
+        resumeInfo?.education.length > 0 && setEduList(resumeInfo?.education)
+    },[])
+    useEffect(() => {
+        setResumeInfo({
+            ...resumeInfo,
+            education: eduList
+        });
+
+    }, [eduList]);
+
+
     return (
         <div className="w-full">
-            <div className="text-lg mb-3">
-                Education
+            <div className="content mb-3">
+                <div className="text-xl">Education</div>
+                <div className="text-sm">Add your educational details.</div>
             </div>
-            <div className="w-full space-y-6 overflow-y-scroll h-[250px]">
-                {eduList.length > 0 && eduList.map((itm, index) => {
+            <div className="w-full space-y-6 overflow-y-scroll h-[400px]">
+                {eduList.length > 0 && eduList?.map((itm, index) => {
                     return (
-                        <form className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg">
+                        <form className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg" key={index}>
                             <div className="">No. {index + 1} </div>
-                            <Input placeholder="Name..." />
-                            <Input placeholder="Marks" />
-                            <Input placeholder="Date" />
+                            <Input name="university" placeholder="university" onChange={(e) => handleInput(e,index)} defaultValue={itm.university} />
+                            <Input name="degree" placeholder="degree" onChange={(e) => handleInput(e,index)} defaultValue={itm.degree} />
+                            <Input name="major" placeholder="major" onChange={(e) => handleInput(e,index)} defaultValue={itm.major} />
+                            <Input type="date" name="startDate" placeholder="startDate" onChange={(e) => handleInput(e,index)} defaultValue={itm.startDate} />
+                            <Input type="date" name="endDate" placeholder="endDate" onChange={(e) => handleInput(e,index)} defaultValue={itm.endDate} />
+                            <Textarea name="summary" placeholder="summary" defaultValue={itm.summary} onChange={(e) => handleInput(e, index)} />
                         </form>
                     )
                 })}
