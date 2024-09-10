@@ -5,7 +5,8 @@ import API from "./../../../../../../../../../service/GlobalApi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, SquarePlus, SquareX } from "lucide-react";
+import { Atom, Loader2, SquarePlus, SquareX } from "lucide-react";
+import AI from "./../../../../../../../../../service/AiModel";
 
 export default function ExperienceForm() {
 
@@ -20,6 +21,25 @@ export default function ExperienceForm() {
         newEntries[index][name] = value;
         // console.log(newEntries)
         setExpList(newEntries);
+    }
+
+    let handleAI = async (index) => {
+        setLoading(true)
+        const prompt = "Generate summary for an resume experience for {position} of 4 to 5 lines";
+        try {
+            // console.log(resumeInfo?.position)
+            let newPrompt = prompt.replace("{position}", expList[index]?.position)
+            const { response } = await AI.sendMessage(newPrompt);
+            let data = JSON.parse(response.text())
+            // Set SUmmary
+            let newEntries = expList.slice()
+            newEntries[index]['summary'] = data;
+            setExpList(newEntries);
+
+        } catch (error) {
+            console.error(error)
+        }
+        setLoading(false)
     }
 
     let handleRemoveExp = () => {
@@ -52,10 +72,6 @@ export default function ExperienceForm() {
         setLoading(false)
     }
 
-    // useEffect(() => {
-    //     setExpList(resumeInfo?.experience)
-    // })
-
 
     useEffect(() => {
         resumeInfo?.experience.length > 0 && setExpList(resumeInfo?.experience)
@@ -85,6 +101,7 @@ export default function ExperienceForm() {
                             <Input type="date" name-="startDate" placeholder="startDate" defaultValue={itm.startDate} onChange={(e) => handleInput(e, index)} />
                             <Input type="date" name="endDate" placeholder="endDate" defaultValue={itm.endDate} onChange={(e) => handleInput(e, index)} />
                             <Textarea name="summary" placeholder="compnay summary" defaultValue={itm.summary} onChange={(e) => handleInput(e, index)} />
+                            <Button className="w-full gap-2" onClick={() => handleAI(index)}> <Atom /> Generate Summary</Button>
                         </form>
                     )
                 })}
