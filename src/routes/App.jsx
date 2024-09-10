@@ -8,11 +8,12 @@ export default function App() {
   const navigate = useNavigate();
   let { isLoaded, isSignedIn } = useUser();
 
-  if (isLoaded) {
-    if (isSignedIn) {
-      navigate('/dashboard')
-    }
+  if (!isLoaded) {
+    return 
   };
+  if (isSignedIn) {
+    navigate('/dashboard')
+  }
 
 
   return (

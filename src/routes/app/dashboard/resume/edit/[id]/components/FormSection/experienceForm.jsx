@@ -1,12 +1,12 @@
+import { ResumeContext } from "@/context/ResumeInfo";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ResumeContext } from "@/context/ResumeInfo";
 import API from "./../../../../../../../../../service/GlobalApi";
+import AI from "./../../../../../../../../../service/AiModel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Atom, Loader2, SquarePlus, SquareX } from "lucide-react";
-import AI from "./../../../../../../../../../service/AiModel";
 
 export default function ExperienceForm() {
 
@@ -19,23 +19,20 @@ export default function ExperienceForm() {
         const newEntries = expList.slice();
         const { name, value } = e.target;
         newEntries[index][name] = value;
-        // console.log(newEntries)
         setExpList(newEntries);
     }
 
     let handleAI = async (index) => {
         setLoading(true)
-        const prompt = "Generate summary for an resume experience for {position} of 4 to 5 lines";
+        const prompt = "Generate summary for an resume experience for {position} in organization {org} of 3 to 4 lines, Schema as {'summary':'content...'}";
         try {
-            // console.log(resumeInfo?.position)
-            let newPrompt = prompt.replace("{position}", expList[index]?.position)
+            const newEntries = expList.slice();
+            let newPrompt = prompt.replace("{position}", newEntries[index]?.position).replace("{org}", newEntries[index]?.company);
             const { response } = await AI.sendMessage(newPrompt);
-            let data = JSON.parse(response.text())
-            // Set SUmmary
-            let newEntries = expList.slice()
-            newEntries[index]['summary'] = data;
+            let { summary } = JSON.parse(response.text());
+            //--- Set Summary
+            newEntries[index]['summary'] = summary;
             setExpList(newEntries);
-
         } catch (error) {
             console.error(error)
         }
@@ -43,9 +40,9 @@ export default function ExperienceForm() {
     }
 
     let handleRemoveExp = () => {
-        let entries = expList;
-        entries.slice(0, -1);
+        let entries = expList.slice(0,-1);
         setExpList(entries);
+        // console.log("remove",expList)
     }
 
     let handleAddExp = () => {
@@ -60,28 +57,25 @@ export default function ExperienceForm() {
     }
 
     let handleSave = async () => {
-        console.log("Hello !")
-        setLoading(true)
+        setLoading(true);
         try {
-            console.log({ experience: expList })
             let data = await API.UpdateSingleResume(id, { data: { experience: expList } });
-            console.log(data)
+            console.log(data);
         } catch (error) {
             console.log(error)
         }
-        setLoading(false)
+        setLoading(false);
     }
-
 
     useEffect(() => {
         resumeInfo?.experience.length > 0 && setExpList(resumeInfo?.experience)
     }, [])
+
     useEffect(() => {
         setResumeInfo({
             ...resumeInfo,
-            experience: expList
+            ['experience']: expList
         });
-
     }, [expList]);
 
     return (
@@ -91,9 +85,9 @@ export default function ExperienceForm() {
                 <div className="text-sm">Add your experinecial details.</div>
             </div>
             <div className="w-full space-y-6 overflow-y-scroll h-[440px]">
-                {expList.length > 0 && expList.map((itm, index) => {
+                {expList.length > 0 && (!loading) && expList.map((itm, index) => {
                     return (
-                        <form key={index} className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg">
+                        <div key={index} className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg">
                             <div className="">No. {index + 1} </div>
                             <Input name="position" placeholder="Position" defaultValue={itm.position} onChange={(e) => handleInput(e, index)} />
                             <Input name="company" placeholder="Company" defaultValue={itm.company} onChange={(e) => handleInput(e, index)} />
@@ -101,8 +95,8 @@ export default function ExperienceForm() {
                             <Input type="date" name-="startDate" placeholder="startDate" defaultValue={itm.startDate} onChange={(e) => handleInput(e, index)} />
                             <Input type="date" name="endDate" placeholder="endDate" defaultValue={itm.endDate} onChange={(e) => handleInput(e, index)} />
                             <Textarea name="summary" placeholder="compnay summary" defaultValue={itm.summary} onChange={(e) => handleInput(e, index)} />
-                            <Button className="w-full gap-2" onClick={() => handleAI(index)}> <Atom /> Generate Summary</Button>
-                        </form>
+                            <Button type="button" className="w-full gap-2" onClick={() => handleAI(index)}> <Atom /> Generate Summary</Button>
+                        </div>
                     )
                 })}
 

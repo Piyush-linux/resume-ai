@@ -12,7 +12,7 @@ export default function EducationPreview() {
                 return (
                     <div className="mb-3" key={i}>
                         <div className="font-bold text-gray-500 text-md"> {itm?.university} </div>
-                        <div className="flex justify-between mb-1"> <span className="text-md">{itm?.degree} in {itm?.major}</span> <span className="text-xs">2024 to 2023</span>   </div>
+                        <div className="flex justify-between mb-1"> <span className="text-md">{itm?.degree} in {itm?.major}</span> <span className="text-xs">{itm?.startDate} to {itm?.endDate}</span>   </div>
                         <div className="text-sm text-justify"> {itm?.summary} </div>
                     </div>
                 )

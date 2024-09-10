@@ -3,8 +3,10 @@ import { ResumeContext } from "@/context/ResumeInfo";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, SquarePlus, SquareX } from "lucide-react";
+import { Atom, Loader2, SquarePlus, SquareX } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import AI from "./../../../../../../../../../service/AiModel";
+import API from "./../../../../../../../../../service/GlobalApi";
 
 export default function EducationForm() {
 
@@ -24,17 +26,17 @@ export default function EducationForm() {
 
     let handleAI = async (index) => {
         setLoading(true)
-        const prompt = "Generate summary for an resume education for {degree} of 4 to 5 lines";
+        const prompt = "Generate summary for an resume education for {degree} of 3 to 4 lines, schema as : {'summary':'content...'}";
         try {
-            // Prompt
-            let newPrompt = prompt.replace("{degree}", eduList[index]?.major)
+            //--- Prompt
+            let entries = eduList.slice();
+            let newPrompt = prompt.replace("{degree}", entries[index]?.major)
             const { response } = await AI.sendMessage(newPrompt);
-            let data = JSON.parse(response.text())
+            let { summary } = JSON.parse(response.text())
 
-            // Set SUmmary
-            let newEntries = eduList.slice()
-            newEntries[index]['summary'] = data;
-            setEduList(newEntries);
+            //--- Set Summary
+            entries[index]['summary'] = summary;
+            setEduList(entries);
 
         } catch (error) {
             console.error(error)
@@ -60,8 +62,15 @@ export default function EducationForm() {
         ])
     }
 
-    let handleSave = () => {
-        console.log("Hello !")
+    let handleSave = async () => {
+        setLoading(true);
+        try {
+            let data = await API.UpdateSingleResume(id, { data: { education: eduList } });
+            console.log(data);
+        } catch (error) {
+            console.log(error)
+        }
+        setLoading(false);
     }
 
 
@@ -83,9 +92,9 @@ export default function EducationForm() {
                 <div className="text-sm">Add your educational details.</div>
             </div>
             <div className="w-full space-y-6 overflow-y-scroll h-[400px]">
-                {eduList.length > 0 && eduList?.map((itm, index) => {
+                {eduList.length > 0 && (!loading) && eduList?.map((itm, index) => {
                     return (
-                        <form className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg" key={index}>
+                        <div className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg" key={index}>
                             <div className="">No. {index + 1} </div>
                             <Input name="university" placeholder="university" onChange={(e) => handleInput(e, index)} defaultValue={itm.university} />
                             <Input name="degree" placeholder="degree" onChange={(e) => handleInput(e, index)} defaultValue={itm.degree} />
@@ -94,7 +103,7 @@ export default function EducationForm() {
                             <Input type="date" name="endDate" placeholder="endDate" onChange={(e) => handleInput(e, index)} defaultValue={itm.endDate} />
                             <Textarea name="summary" placeholder="summary" defaultValue={itm.summary} onChange={(e) => handleInput(e, index)} />
                             <Button className="w-full gap-2" onClick={() => handleAI(index)}> <Atom /> Generate Summary</Button>
-                        </form>
+                        </div>
                     )
                 })}
             </div>
