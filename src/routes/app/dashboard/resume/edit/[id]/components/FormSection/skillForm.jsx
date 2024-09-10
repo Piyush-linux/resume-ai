@@ -1,8 +1,10 @@
 import { ResumeContext } from "@/context/ResumeInfo";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import AI from "./../../../../../../../../../service/AiModel";
+import API from "./../../../../../../../../../service/GlobalApi";
 import { Button } from "@/components/ui/button";
-import { Atom } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
@@ -10,7 +12,7 @@ export default function SkillForm() {
     let { id } = useParams();
     let { resumeInfo, setResumeInfo } = useContext(ResumeContext);
     let [loading, setLoading] = useState(false);
-    let [skills, setSkills] = useState(['html', 'css', 'js'])
+    let [skills, setSkills] = useState([])
     let [newSkill, SetNewSkill] = useState('');
     let [aiList, setAiList] = useState([]);
 
@@ -18,15 +20,46 @@ export default function SkillForm() {
         let NewSkill = e.target.value;
         SetNewSkill(NewSkill);
     }
+    
     let handleAddSkill = () => {
         setSkills([...skills, newSkill]);
-        SetNewSkill('');
+        SetNewSkill(null);
         console.log(newSkill);
+    }
+    
+    let handleSkillRemove = (index) => {
+        let entries = skills.slice();
+        entries = entries.filter(function(item,i) {
+            return i !== index
+        })
+        setSkills(entries);
     }
 
     let handleAi = () => {
         console.log("Handle...");
     }
+
+    let handleSave = async () => {
+        setLoading(true);
+        try {
+            let data = await API.UpdateSingleResume(id, { data: { skills: skills } });
+            console.log(data);
+        } catch (error) {
+            console.log(error)
+        }
+        setLoading(false);
+    }
+
+    useEffect(()=>{
+        resumeInfo?.skills.length > 0 && setSkills(resumeInfo?.skills)
+    },[])
+
+    useEffect(() => {
+        setResumeInfo({
+            ...resumeInfo,
+            skills: skills
+        });
+    }, [skills]);
 
     return (
         <div className="w-full">
@@ -37,15 +70,16 @@ export default function SkillForm() {
                 </div>
                 {/* <Button variant="outline" className="gap-2" onClick={() => handleAi()}><Atom />Gen AI</Button> */}
             </div>
-            <div className="w-full grid grid-cols-4 mb-3 gap-4">
+            <div className="w-full grid grid-cols-4 mb-4 gap-4">
                 <Input placeholder="skills..." className="col-span-3" onChange={(e) => handleInput(e)} defaultValue={newSkill} />
                 <Button className="col-span-1" variant="outline" onClick={() => handleAddSkill()}> Add </Button>
+                <Button type="submit" variant="link" onClick={() => handleSave()} className="col-span-4"> {loading ? <Loader2 className="animate-spin" /> : "Save"}  </Button>
             </div>
-            <div className="tags flex flex-wrap space-x-3">
+            <div className="tags flex flex-wrap gap-2">
                 {
                     skills.length > 0 && skills.map((x, index) => {
                         return (
-                            <Badge key={index}> {x} </Badge>
+                            <Badge key={index} className="gap-2" onClick={()=> handleSkillRemove(index)}> {x} <X /> </Badge>
                         )
                     })
                 }
