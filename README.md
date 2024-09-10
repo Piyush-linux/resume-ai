@@ -56,6 +56,8 @@ hover:scale-105 transition-all hover:shadow-xl
 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
 ```
 
+- https://www.npmjs.com/package/react-toastify
+
 ## API
 
 ```

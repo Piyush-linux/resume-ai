@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Atom, Loader2 } from "lucide-react";
 import AI from "./../../../../../../../../../service/AiModel";
 import API from "./../../../../../../../../../service/GlobalApi";
+import { toast } from "react-toastify";
 
 
 export default function SummaryForm() {
@@ -63,6 +64,7 @@ export default function SummaryForm() {
         try {
             let data = await API.UpdateSingleResume(id, { data: { summary: summary } });
             // console.log(data)
+            toast("Data Saved !");
         } catch (error) {
             console.log(error)
         }

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { toast } from 'react-toastify'
 
 export default function SkillForm() {
     let { id } = useParams();
@@ -19,6 +20,7 @@ export default function SkillForm() {
     let handleInput = (e) => {
         let NewSkill = e.target.value;
         SetNewSkill(NewSkill);
+        
     }
     
     let handleAddSkill = () => {
@@ -44,6 +46,7 @@ export default function SkillForm() {
         try {
             let data = await API.UpdateSingleResume(id, { data: { skills: skills } });
             console.log(data);
+            toast("Data Saved !");
         } catch (error) {
             console.log(error)
         }

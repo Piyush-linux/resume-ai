@@ -7,6 +7,7 @@ import { Atom, Loader2, SquarePlus, SquareX } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import AI from "./../../../../../../../../../service/AiModel";
 import API from "./../../../../../../../../../service/GlobalApi";
+import { toast } from "react-toastify";
 
 export default function EducationForm() {
 
@@ -67,6 +68,7 @@ export default function EducationForm() {
         try {
             let data = await API.UpdateSingleResume(id, { data: { education: eduList } });
             console.log(data);
+            toast("Data Saved !");
         } catch (error) {
             console.log(error)
         }

@@ -4,7 +4,7 @@ import { ResumeContext } from "@/context/ResumeInfo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import API from "./../../../../../../../../../service/GlobalApi";
-
+import { toast } from 'react-toastify'
 
 export default function PersonalForm() {
 
@@ -32,8 +32,8 @@ export default function PersonalForm() {
         console.log(formData)
         try {
             let data = await API.UpdateSingleResume(id, { data: formData });
-
             console.log(data);
+            toast("Data Saved !");
         } catch (error) {
             console.log("--- Error ---", error)
         }

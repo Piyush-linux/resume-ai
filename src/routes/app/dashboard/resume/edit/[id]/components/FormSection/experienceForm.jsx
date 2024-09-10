@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Atom, Loader2, SquarePlus, SquareX } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function ExperienceForm() {
 
@@ -61,6 +62,7 @@ export default function ExperienceForm() {
         try {
             let data = await API.UpdateSingleResume(id, { data: { experience: expList } });
             console.log(data);
+            toast("Data Saved !");
         } catch (error) {
             console.log(error)
         }

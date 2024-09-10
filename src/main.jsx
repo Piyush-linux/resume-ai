@@ -6,6 +6,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './index.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ErrorPage from './routes/error-page.jsx';
 import App from './routes/App.jsx';
 import SignUp from './routes/auth/sign-up';
@@ -64,6 +66,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       <RouterProvider router={router} />
+      <ToastContainer/>
     </ClerkProvider>
   </StrictMode>,
 )
