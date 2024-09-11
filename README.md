@@ -1,4 +1,13 @@
-# React + Vite
+# Smart CV
+
+> Blossom into Your Dream Career.
+
+__Key Features:__
+- AI-Powered Personalization: Tailor your resume effortlessly with AI-driven suggestions, ensuring your skills and experience stand out.
+- Elegant Design : Crafted with React.js and Tailwind CSS, the interface is as graceful as sakura petals, offering a beautiful, user-friendly experience.
+- Seamless Authentication: Secure login with Clerk, providing peace of mind as you create and manage your resumes.
+- Robust Backend: Powered by Strapi CMS, the backend is flexible and powerful, ensuring smooth integration and data management.
+- Instant Download & Sharing: Generate, download, and share your resume in just a few clicks, making job applications a breeze.
 
 ## Task
 - [ ] Toast 
