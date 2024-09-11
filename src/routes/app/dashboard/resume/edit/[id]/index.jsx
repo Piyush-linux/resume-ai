@@ -22,8 +22,8 @@ export default function EditResume() {
     let getSingleResume = async () => {
         try {
             let { data } = await API.FetchSingleResume(id);
-            setResumeInfo(data.data[0])
-            // console.log(ResumeInfo)
+            setResumeInfo(data.data)
+            console.log(data.data)
         } catch (error) {
             console.log(error);
         }
@@ -43,8 +43,8 @@ export default function EditResume() {
     }
 
     useEffect(() => {
-        setResumeInfo(data)
-        // getSingleResume();
+        // setResumeInfo(data)
+        getSingleResume();
     }, [id])
 
     return (

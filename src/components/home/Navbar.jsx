@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
     return (
         <>
@@ -43,12 +45,7 @@ export default function Navbar() {
 
                         <div className="flex items-center gap-4">
                             <div className="sm:flex sm:gap-4">
-                                <a
-                                    className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                                    href="#"
-                                >
-                                    Login
-                                </a>
+                                <Link className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow" to="/auth/sign-in">Login</Link>
 
                                 <div className="hidden sm:flex">
                                     <a

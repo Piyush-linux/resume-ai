@@ -4,7 +4,7 @@ export default function SummaryPreview({resumeInfo}) {
         <div className="w-full">
             <div className="text-lg font-bold tracking-widest uppercase">summary</div>
             <p className="text-xs text-justify">
-                {resumeInfo.summary}
+                {resumeInfo?.summary}
             </p>
         </div>
     )

@@ -47,11 +47,11 @@ export default function PersonalForm() {
             </div>
 
             <form className="w-full space-y-3" onSubmit={formSubmit}>
-                <Input type="text" name="name" defaultValue={resumeInfo.name} placeholder="Name" onChange={handleInput} />
-                <Input type="text" name="position" defaultValue={resumeInfo.position} placeholder="Job Position" onChange={handleInput} />
-                <Input type="text" name="phone" defaultValue={resumeInfo.phone} placeholder="Phone" onChange={handleInput} />
-                <Input type="text" name="mail" defaultValue={resumeInfo.mail} placeholder="Email" onChange={handleInput} />
-                <Input type="text" name="location" defaultValue={resumeInfo.location} placeholder="Location" onChange={handleInput} />
+                <Input type="text" name="name" defaultValue={resumeInfo?.name} placeholder="Name" onChange={handleInput} />
+                <Input type="text" name="position" defaultValue={resumeInfo?.position} placeholder="Job Position" onChange={handleInput} />
+                <Input type="text" name="phone" defaultValue={resumeInfo?.phone} placeholder="Phone" onChange={handleInput} />
+                <Input type="text" name="mail" defaultValue={resumeInfo?.mail} placeholder="Email" onChange={handleInput} />
+                <Input type="text" name="location" defaultValue={resumeInfo?.location} placeholder="Location" onChange={handleInput} />
                 <div className="w-full mx-auto mt-6">
                     <Button type="submit" variant="link" className="w-full">Save</Button>
                 </div>
