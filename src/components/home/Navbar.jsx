@@ -21,8 +21,7 @@ export default function Navbar() {
 
                         <div className="flex items-center gap-4">
                             <div className="sm:flex sm:gap-4">
-                                <Link className="rounded-md bg-rose-400 px-5 py-2.5 text-sm font-medium text-white shadow" to="/auth/sign-in">Login</Link>
-
+                                <Link className="rounded-md bg-gradient-to-r from-violet-400 to-rose-400 border-2 border-white px-5 py-2.5 text-sm hover:shadow-xl font-bold tracking-wider text-white" to="/auth/sign-in">Login</Link>
                                 <div className="hidden sm:flex">
                                     <a
                                         className="rounded-md bg-rose-100 px-5 py-2.5 text-sm font-medium text-rose-600 hover:bg-rose-400 hover:text-white transition ease-in-out"
