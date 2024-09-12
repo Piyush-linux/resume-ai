@@ -71,4 +71,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  .layout {
+    @apply bg-[url('/boy.jpg')] bg-cover bg-no-repeat bg-center bg-origin-border bg-fixed;
+  }
 }

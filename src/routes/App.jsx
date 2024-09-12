@@ -29,14 +29,15 @@ export default function App() {
 
   return (
     <>
-      <div className="">
+      <div className="h-screen">
 
         {/* HERO */}
-        <div className="w-full flex justify-center items-center mt-24">
-          <SparklesText text="SeekOut" />;
+        <div className="w-full  mt-24 gap-4">
+          <div className="mx-auto w-fit text-white">AI Resume Builder</div>
+          <SparklesText text="SeekOut" className="mx-auto text-white w-fit " />;
         </div>
-        <div className="relative flex h-full w-full mx-auto max-w-[32rem] items-center justify-center overflow-hidden rounded-lg  bg-background px-20 pb-20 ">
-          <IconCloud iconSlugs={slugs} />
+        <div className="relative flex h-full w-full mx-auto max-w-[32rem] items-center justify-center overflow-hidden rounded-lg  bg-transparent px-20 pt-0 ">
+          <IconCloud iconSlugs={slugs} className="bg-transparent" />
         </div>
         {/* DOCK */}
         <div className="absolute bottom-10 mx-auto w-full">

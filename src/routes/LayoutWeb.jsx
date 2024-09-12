@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 export default function LayoutWeb() {
     return (
-        <div className="">
+        <div className="layout h-screen">
 
             <Navbar />
             <Outlet />
