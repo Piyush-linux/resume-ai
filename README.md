@@ -14,6 +14,11 @@ __Key Features:__
 - [ ] New CV Templates
 - [ ] Pic Upload Option
 - [ ] CV CreatedOn 
+    - [ ] https://www.pinterest.com/pin/492649950141865/
+    - [ ] https://www.pinterest.com/pin/289848926037524746/
+    - [ ] https://www.pinterest.com/pin/23503229299428390/ 
+    - [ ] https://www.pinterest.com/pin/cv-ilustracin-y-diseo-on-behance--609745237063037086/ 
+    - [ ] https://www.pinterest.com/pin/282389839129606118/
 - [ ] Social Media Linking
 
 
