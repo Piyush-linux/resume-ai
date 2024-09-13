@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 export default function Navbar() {
     return (
         <>
-            <div className="">
+            <div className="no-print">
                 <header className="bg-white">
                     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
                         <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">

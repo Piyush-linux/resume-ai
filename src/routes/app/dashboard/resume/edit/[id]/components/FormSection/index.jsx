@@ -5,18 +5,21 @@ import SummaryForm from "./summaryForm";
 import ExperienceForm from "./experienceForm";
 import EducationForm from "./educationForm";
 import SkillForm from "./skillForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { House } from "lucide-react";
 
 export default function FormSection() {
 
+    let {id} = useParams();
     let [formIndex, setFormIndex] = useState(1);
+    let navigate = useNavigate();
 
     return(
         <div className="p-6">
             <div className="mb-10 w-full flex justify-between space-x-2">
                 <div className="">
                     <Link to="/dashboard" > <Button variant="outline"><House /></Button> </Link>
+                     <Button variant="outline" onClick={()=>navigate(`/resume/view/${id}`)}><House /></Button>
                 </div>
                 <div className="space-x-2">
                     <Button onClick={()=>setFormIndex(formIndex-1)} disabled={formIndex == 1} >Back</Button>

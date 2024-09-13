@@ -11,6 +11,11 @@ __Key Features:__
 
 ## Task
 - [ ] Toast 
+- [ ] New CV Templates
+- [ ] Pic Upload Option
+- [ ] CV CreatedOn 
+- [ ] Social Media Linking
+
 
 
 ## Backend 
