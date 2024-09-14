@@ -10,6 +10,9 @@ __Key Features:__
 - Instant Download & Sharing: Generate, download, and share your resume in just a few clicks, making job applications a breeze.
 
 ## Task
+- [ ] Experince Form
+    - validation for position & company to generate AI content !
+
 - [ ] Toast 
 - [ ] New CV Templates
 - [ ] Pic Upload Option

@@ -7,7 +7,7 @@ export default function SkillPreview({resumeInfo}) {
             <div className="w-full flex flex-wrap space-x-2">
                 {
                     resumeInfo?.skills?.map((x,i)=>{
-                            return <Badge key={i} className="rounded-md"> {x} </Badge>        
+                            return <Badge key={i} className="rounded-md" variant={resumeInfo?.theme}> {x} </Badge>        
                     })
                 }
             </div>

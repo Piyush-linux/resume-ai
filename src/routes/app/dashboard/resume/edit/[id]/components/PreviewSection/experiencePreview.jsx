@@ -1,9 +1,9 @@
-import { ResumeContext } from "@/context/ResumeInfo";
-import { useContext } from "react"
+// import { ResumeContext } from "@/context/ResumeInfo";
+// import { useContext } from "react"
 
-export default function ExperiencePreview() {
+export default function ExperiencePreview({resumeInfo}) {
 
-let {resumeInfo, setResumeInfo} = useContext(ResumeContext);
+// let {resumeInfo, setResumeInfo} = useContext(ResumeContext);
     return (
         <div className="w-full">
             <div className="text-lg font-bold tracking-widest uppercase">experience</div>
@@ -23,4 +23,4 @@ let {resumeInfo, setResumeInfo} = useContext(ResumeContext);
             </div>
         </div>
     )
-}
+} 

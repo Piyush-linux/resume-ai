@@ -19,16 +19,11 @@ export default function SummaryForm() {
 
     let genAI = async () => {
         setLoading(true)
-
         const prompt = "List 3 summary for an resume for {position} of 4 to 5 lines three different level such as beginner, intermediate and expert, with this schema: [{ 'level': beginner, 'summary': 'this is the summary'}], DO NOT INCLUDE BACKTICKS IN THE RESPONSE ";
-
         try {
             // console.log(resumeInfo?.position)
             let newPrompt = prompt.replace("{position}", resumeInfo?.position)
             const { response } = await AI.sendMessage(newPrompt);
-
-            // json_match = response.text().search(r"```json\s*(.*?)\s*```", json_str, re.DOTALL) ;
-
             let data = JSON.parse(response.text())
             setAiList(data);
             // let data = JSON.parse(response)
@@ -37,7 +32,6 @@ export default function SummaryForm() {
             console.error(error)
         }
         setLoading(false)
-
     }
 
 
@@ -95,7 +89,7 @@ export default function SummaryForm() {
             </div>
             {/* Summary... */}
             <div className="w-full mt-10 overflow-y-scroll h-80">
-                {aiList.length > 0 && aiList.map((x, i) => {
+                {aiList.length > 0 && aiList?.map((x, i) => {
                     return (<div onClick={() => handleList(x.summary)} className="p-6 shadow-xl cursor-pointer rounded-lg border-2 border-rose-400 space-y-3 mb-5" key={i}>
                         <div className="text-xl"> {x.level} </div>
                         <p className="text-xs" > {x.summary} </p>

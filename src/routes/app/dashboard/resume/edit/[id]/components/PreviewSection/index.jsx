@@ -12,13 +12,16 @@ export default function PreviewSection() {
 
     return (
         <div className="resume w-full border-2 border-gray-500 rounded-lg p-10 space-y-5">
+
+            {/* Templates */} 
+
             {/* Personal */}
             <PersonalPreview resumeInfo={resumeInfo} />
-            <div className="w-full border-2 border-gray-800 mb-2 rounded-xl"></div>
+            <div className={`w-full border-2 border-gray-800 mb-2 rounded-xl`}></div>
             {/* summary */}
             <SummaryPreview resumeInfo={resumeInfo} />
             {/* Experience */}
-            <ExperiencePreview />
+            <ExperiencePreview resumeInfo={resumeInfo} />
             {/* Education */}
             <EducationPreview/>
             {/* Skill */}

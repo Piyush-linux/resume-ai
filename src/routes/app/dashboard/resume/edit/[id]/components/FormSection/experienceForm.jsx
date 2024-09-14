@@ -31,6 +31,13 @@ export default function ExperienceForm() {
     }
 
     let handleAI = async (index) => {
+
+        let entries = expList.slice()
+        if(entries[index].position.length == 0 || entries[index].company.length == 0 ){
+            toast("Please Fill the Previous Data Field !")
+            return; 
+        }
+
         setLoading(true)
         const prompt = "Generate summary for an resume experience for {position} in organization {org} of 3 to 4 lines, Schema as {'summary':'content...'}";
         try {
@@ -94,16 +101,16 @@ export default function ExperienceForm() {
                 <div className="text-sm">Add your experinecial details.</div>
             </div>
             <div className="w-full space-y-6 overflow-y-scroll h-[440px]">
-                {expList.length > 0 && (!loading) && expList.map((itm, index) => {
+                {expList.length > 0 && expList.map((itm, index) => {
                     return (
                         <div key={index} className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg">
                             <div className="">No. {index + 1} </div>
-                            <Input name="position" placeholder="Position" defaultValue={itm.position} onChange={(e) => handleInput(e, index)} />
-                            <Input name="company" placeholder="Company" defaultValue={itm.company} onChange={(e) => handleInput(e, index)} />
-                            <Input name="location" placeholder="location" defaultValue={itm.location} onChange={(e) => handleInput(e, index)} />
-                            <Input type="date" name-="startDate" placeholder="startDate" defaultValue={itm.startDate} onChange={(e) => handleInput(e, index)} />
-                            <Input type="date" name="endDate" placeholder="endDate" defaultValue={itm.endDate} onChange={(e) => handleInput(e, index)} />
-                            <Textarea name="summary" placeholder="compnay summary" defaultValue={itm.summary} onChange={(e) => handleInput(e, index)} />
+                            <Input name="position" placeholder="Position" defaultValue={itm?.position} onChange={(e) => handleInput(e, index)} />
+                            <Input name="company" placeholder="Company" defaultValue={itm?.company} onChange={(e) => handleInput(e, index)} />
+                            <Input name="location" placeholder="location" defaultValue={itm?.location} onChange={(e) => handleInput(e, index)} />
+                            <Input type="date" name-="startDate" placeholder="startDate" defaultValue={itm?.startDate} onChange={(e) => handleInput(e, index)} />
+                            <Input type="date" name="endDate" placeholder="endDate" defaultValue={itm?.endDate} onChange={(e) => handleInput(e, index)} />
+                            <Textarea name="summary" placeholder="compnay summary" defaultValue={itm?.summary} onChange={(e) => handleInput(e, index)} />
                             <Button type="button" className="w-full gap-2" onClick={() => handleAI(index)}> <Atom /> Generate Summary</Button>
                         </div>
                     )

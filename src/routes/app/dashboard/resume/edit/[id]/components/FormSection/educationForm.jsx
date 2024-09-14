@@ -101,16 +101,16 @@ export default function EducationForm() {
                 <div className="text-sm">Add your educational details.</div>
             </div>
             <div className="w-full space-y-6 overflow-y-scroll h-[400px]">
-                {eduList.length > 0 && (!loading) && eduList?.map((itm, index) => {
+                {eduList.length > 0 && eduList?.map((itm, index) => {
                     return (
                         <div className="w-full border-2 space-y-3 border-gray-600 p-6 rounded-lg" key={index}>
                             <div className="">No. {index + 1} </div>
-                            <Input name="university" placeholder="university" onChange={(e) => handleInput(e, index)} defaultValue={itm.university} />
-                            <Input name="degree" placeholder="degree" onChange={(e) => handleInput(e, index)} defaultValue={itm.degree} />
-                            <Input name="major" placeholder="major" onChange={(e) => handleInput(e, index)} defaultValue={itm.major} />
-                            <Input type="date" name="startDate" placeholder="startDate" onChange={(e) => handleInput(e, index)} defaultValue={itm.startDate} />
-                            <Input type="date" name="endDate" placeholder="endDate" onChange={(e) => handleInput(e, index)} defaultValue={itm.endDate} />
-                            <Textarea name="summary" placeholder="summary" defaultValue={itm.summary} onChange={(e) => handleInput(e, index)} />
+                            <Input name="university" placeholder="university" onChange={(e) => handleInput(e, index)} defaultValue={itm?.university} />
+                            <Input name="degree" placeholder="degree" onChange={(e) => handleInput(e, index)} defaultValue={itm?.degree} />
+                            <Input name="major" placeholder="major" onChange={(e) => handleInput(e, index)} defaultValue={itm?.major} />
+                            <Input type="date" name="startDate" placeholder="startDate" onChange={(e) => handleInput(e, index)} defaultValue={itm?.startDate} />
+                            <Input type="date" name="endDate" placeholder="endDate" onChange={(e) => handleInput(e, index)} defaultValue={itm?.endDate} />
+                            <Textarea name="summary" placeholder="summary"  onChange={(e) => handleInput(e, index)} defaultValue={itm?.summary} />
                             <Button className="w-full gap-2" onClick={() => handleAI(index)}> <Atom /> Generate Summary</Button>
                         </div>
                     )
