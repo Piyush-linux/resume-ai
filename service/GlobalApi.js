@@ -15,7 +15,7 @@ const CreateResume = (data) => instance.post('/resumes',data);
 //-- TODO: Filter fields=title,resumeid
 const FetchResume = (mail) => instance.get(`/resumes?filters[mail][$eq]=${mail}`);
 const FetchSingleResume = (id) => instance.get(`/resumes/${id}?populate=*`);
-const RemoveSingleResume = (id) => instance.delete(`/resumes?fields[0]=${id}`);
+const RemoveSingleResume = (id) => instance.delete(`/resumes/${id}`);
 const UpdateSingleResume = (id, data) => instance.put(`/resumes/${id}`,data);
 
 

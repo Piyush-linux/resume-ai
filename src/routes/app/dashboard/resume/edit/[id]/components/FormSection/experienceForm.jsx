@@ -14,7 +14,14 @@ export default function ExperienceForm() {
     let { resumeInfo, setResumeInfo } = useContext(ResumeContext)
     let { id } = useParams();
     let [loading, setLoading] = useState(false);
-    let [expList, setExpList] = useState([]);
+    let [expList, setExpList] = useState([{
+        position: "",
+        company: "",
+        location: "",
+        startDate: "",
+        endDate: "",
+        summary: ""
+    }]);
 
     let handleInput = (e, index) => {
         const newEntries = expList.slice();

@@ -25,7 +25,8 @@ export default function SkillForm() {
     
     let handleAddSkill = () => {
         setSkills([...skills, newSkill]);
-        SetNewSkill(null);
+        let a = ''
+        SetNewSkill(a);
         console.log(newSkill);
     }
     
@@ -54,7 +55,7 @@ export default function SkillForm() {
     }
 
     useEffect(()=>{
-        resumeInfo?.skills.length > 0 && setSkills(resumeInfo?.skills)
+        resumeInfo?.skills?.length > 0 && setSkills(resumeInfo?.skills)
     },[])
 
     useEffect(() => {
@@ -80,7 +81,7 @@ export default function SkillForm() {
             </div>
             <div className="tags flex flex-wrap gap-2">
                 {
-                    skills.length > 0 && skills.map((x, index) => {
+                    skills.length > 0 && skills?.map((x, index) => {
                         return (
                             <Badge key={index} className="gap-2" onClick={()=> handleSkillRemove(index)}> {x} <X /> </Badge>
                         )

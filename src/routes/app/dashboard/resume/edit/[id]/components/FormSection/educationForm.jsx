@@ -14,7 +14,14 @@ export default function EducationForm() {
     let { resumeInfo, setResumeInfo } = useContext(ResumeContext)
     let { id } = useParams();
     let [loading, setLoading] = useState(false);
-    let [eduList, setEduList] = useState([]);
+    let [eduList, setEduList] = useState([{
+        university: "",
+        degree: "",
+        major: "",
+        startDate: "",
+        endDate: "",
+        summary: ""
+    }]);
 
 
     let handleInput = (e, index) => {
